@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>接机日程与须知</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+html{-webkit-text-size-adjust:100%; text-size-adjust:100%;}
+
+:root{
+  --paper:#faf7f3; --paper-raised:#ffffff; --ink:#241b2f; --ink-soft:#5b5063;
+  --line:#e1d5da; --accent:#7a2f63; --accent-soft:#f3e3ee;
+  --good:#3f6b4a; --good-soft:#e3ede4; --warn:#a85c2a; --warn-soft:#f6e6d8;
+  --link:#2a5db0; --link-soft:#e5edf9; --xhs:#c23b6b; --xhs-soft:#fbe6ee;
+  --shadow: 0 1px 2px rgba(36,27,47,.06), 0 6px 20px -8px rgba(36,27,47,.12);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#1a1420; --paper-raised:#241c2c; --ink:#f0e9ee; --ink-soft:#b4a6bd;
+    --line:#3a2e42; --accent:#e0a2c8; --accent-soft:#33222f;
+    --good:#8fc79a; --good-soft:#22301f; --warn:#e6ab72; --warn-soft:#332417;
+    --link:#8fb3e8; --link-soft:#1e2836; --xhs:#f0a8c4; --xhs-soft:#33202a;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 24px -8px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#1a1420; --paper-raised:#241c2c; --ink:#f0e9ee; --ink-soft:#b4a6bd;
+  --line:#3a2e42; --accent:#e0a2c8; --accent-soft:#33222f;
+  --good:#8fc79a; --good-soft:#22301f; --warn:#e6ab72; --warn-soft:#332417;
+  --link:#8fb3e8; --link-soft:#1e2836; --xhs:#f0a8c4; --xhs-soft:#33202a;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 24px -8px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box;}
+html,body{max-width:100%; overflow-x:hidden;}
+body{background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans',system-ui,sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; margin:0;}
+img,svg{max-width:100%;}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums;}
+a{color:var(--link);}
+h2{font-family:'IBM Plex Serif',Georgia,serif;}
+.wrap{max-width:660px;margin:0 auto;padding:0 16px 64px;}
+
+.topbar{position:sticky; top:0; z-index:20; background:var(--paper); border-bottom:1px solid var(--line); padding:13px 16px 11px; overflow:hidden;}
+.topbar::before{content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(30deg, var(--accent) 1px, transparent 1px),
+    linear-gradient(150deg, var(--accent) 1px, transparent 1px),
+    linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+  background-size:26px 45px; background-position:0 0,0 0,0 0;
+  opacity:.05; -webkit-mask-image:linear-gradient(to bottom, black, transparent 92%); mask-image:linear-gradient(to bottom, black, transparent 92%);}
+.city-tag{display:flex; align-items:center; gap:5px; margin-top:3px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.03em; color:var(--ink-soft);}
+.city-tag .bee-icon{flex:none; color:var(--accent);}
+.bee-icon{width:13px; height:13px; display:inline-block; vertical-align:-2px;}
+.topbar-inner{max-width:660px;margin:0 auto;}
+.eyebrow{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); font-weight:600;}
+.title{font-family:'IBM Plex Serif',Georgia,serif; font-size:19px; font-weight:700; margin-top:2px;}
+.progress-row{display:flex; justify-content:space-between; align-items:baseline; gap:10px;}
+.progress-num{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-soft); white-space:nowrap;}
+.progress-track{margin-top:9px; height:6px; border-radius:99px; background:var(--line); overflow:hidden;}
+.progress-fill{height:100%; background:var(--accent); width:0%; transition:width .3s ease;}
+
+.navchips{margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;}
+.navchips a{font-family:'IBM Plex Mono',monospace; font-size:11px; text-decoration:none; color:var(--ink-soft); background:var(--paper-raised); border:1px solid var(--line); border-radius:99px; padding:5px 10px;}
+
+.card{margin-top:16px; background:var(--paper-raised); border:1px solid var(--line); border-radius:14px; padding:14px 16px; box-shadow:var(--shadow);}
+.field-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px 14px;}
+.field-grid .full{grid-column:1/-1;}
+.field{display:flex; flex-direction:column; gap:3px;}
+.field label{font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); font-weight:600;}
+.field input,.field select{font:inherit; font-family:'IBM Plex Mono',monospace; font-size:16px; background:transparent; border:none; border-bottom:1.5px solid var(--line); padding:4px 2px; color:var(--ink); width:100%; max-width:100%;}
+.field input:focus,.field select:focus{outline:none; border-bottom-color:var(--accent);}
+.card-foot{margin-top:12px; padding-top:10px; border-top:1px dashed var(--line); display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; font-size:12.5px; color:var(--ink-soft);}
+.pay-pill{font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:12.5px; background:var(--accent-soft); color:var(--accent); padding:5px 10px; border-radius:99px;}
+.end-time b{color:var(--ink); font-family:'IBM Plex Mono',monospace;}
+
+.overview{margin-top:12px; font-size:12.5px; color:var(--ink-soft); background:var(--accent-soft); border-radius:10px; padding:10px 12px;}
+.overview b{color:var(--ink);}
+
+.section{margin-top:34px; scroll-margin-top:70px;}
+.section h2{font-size:17px; font-weight:700; margin:0 0 2px; display:flex; align-items:center; gap:7px;}
+.section h2::before{content:""; flex:none; width:9px; height:9px; background:var(--accent); clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);}
+.section .sub{font-size:12.5px; color:var(--ink-soft); margin-bottom:10px;}
+
+.flow{display:flex; flex-direction:column; gap:9px;}
+.item{background:var(--paper-raised); border:1px solid var(--line); border-radius:12px; padding:11px 13px; display:flex; gap:11px; align-items:flex-start; box-shadow:var(--shadow);}
+.item-badge{flex:none; width:26px; height:26px; border-radius:50%; background:var(--paper); border:1.5px solid var(--accent); color:var(--accent); font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center;}
+.item.done .item-badge{background:var(--good); border-color:var(--good); color:var(--paper-raised);}
+.item-body{flex:1; min-width:0;}
+.item-time{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent); font-weight:600;}
+.item-title{font-size:14.5px; font-weight:600; margin-top:1px;}
+.item.done .item-title{color:var(--ink-soft); text-decoration:line-through; text-decoration-color:var(--line);}
+.item-sub{margin-top:5px; font-size:12.5px; color:var(--ink-soft);}
+.item-sub b{color:var(--ink);}
+.item-warn{margin-top:6px; font-size:12px; background:var(--warn-soft); color:var(--warn); border-radius:8px; padding:6px 9px; font-weight:600;}
+.item-check{flex:none; width:22px; height:22px; margin-top:1px; appearance:none; border:1.5px solid var(--ink-soft); border-radius:6px; cursor:pointer; position:relative; background:var(--paper-raised);}
+.item-check:checked{background:var(--good); border-color:var(--good);}
+.item-check:checked::after{content:""; position:absolute; left:6px; top:2px; width:6px; height:11px; border:solid var(--paper-raised); border-width:0 2px 2px 0; transform:rotate(45deg);}
+
+.linkbtn{display:inline-flex; align-items:center; gap:5px; margin-top:7px; margin-right:6px; font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:600; color:var(--link); background:var(--link-soft); border:1px solid var(--link); border-radius:7px; padding:5px 9px; text-decoration:none;}
+.linkbtn::after{content:"→";}
+.linkbtn.xhs{color:var(--xhs); background:var(--xhs-soft); border-color:var(--xhs);}
+button.linkbtn{appearance:none; -webkit-appearance:none; font:inherit; cursor:pointer; line-height:1.3;}
+button.linkbtn.xhs::after{content:"⧉";}
+button.linkbtn.xhs.copied{background:var(--good-soft); color:var(--good); border-color:var(--good);}
+button.linkbtn.xhs.copied::after{content:"✓";}
+.xhs-toast{position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(12px); opacity:0; pointer-events:none; background:var(--ink); color:var(--paper); font-size:12.5px; font-weight:600; padding:9px 16px; border-radius:99px; box-shadow:var(--shadow); transition:opacity .2s ease, transform .2s ease; z-index:50; white-space:nowrap;}
+.xhs-toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+.linkrow{display:flex; flex-wrap:wrap; gap:7px; margin-top:2px;}
+
+.reg-block{background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; padding:12px 13px; margin-top:9px; box-shadow:var(--shadow);}
+.reg-head{display:flex; align-items:flex-start; gap:10px;}
+.reg-head input[type=checkbox]{appearance:none; width:18px; height:18px; min-width:18px; margin-top:2px; border:1.5px solid var(--ink-soft); border-radius:5px; cursor:pointer; position:relative; background:var(--paper-raised);}
+.reg-head input[type=checkbox]:checked{background:var(--good); border-color:var(--good);}
+.reg-head input[type=checkbox]:checked::after{content:""; position:absolute; left:5px; top:1px; width:5px; height:9px; border:solid var(--paper-raised); border-width:0 2px 2px 0; transform:rotate(45deg);}
+.reg-head label{font-size:14px; font-weight:600; cursor:pointer;}
+.reg-block.done label{color:var(--ink-soft); text-decoration:line-through; text-decoration-color:var(--line);}
+.reg-steps{margin:8px 0 0 28px; padding:0; list-style:decimal; display:flex; flex-direction:column; gap:5px;}
+.reg-steps li{font-size:13.5px; color:var(--ink);}
+.reg-note{margin:8px 0 0 28px; font-size:12px; color:var(--ink-soft);}
+.reg-plain{margin-left:28px; font-size:13.5px; color:var(--ink); margin-top:6px;}
+.reg-plain .k{font-weight:600;}
+
+.guide{margin-top:9px; background:var(--paper); border:1px solid var(--line); border-radius:10px; overflow:hidden;}
+.guide summary{cursor:pointer; list-style:none; padding:9px 12px; font-size:12.5px; font-weight:700; color:var(--accent); display:flex; align-items:center; gap:6px; user-select:none;}
+.guide summary::-webkit-details-marker{display:none;}
+.guide summary::before{content:"▸"; transition:transform .15s ease; flex:none; font-size:11px;}
+.guide[open] summary::before{transform:rotate(90deg);}
+.guide summary .gcount{margin-left:auto; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:10.5px; color:var(--ink-soft); background:var(--paper-raised); border:1px solid var(--line); border-radius:99px; padding:1px 8px;}
+.guide-body{padding:2px 13px 13px; border-top:1px dashed var(--line);}
+.guide-steps{margin:10px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:9px;}
+.guide-steps li{display:flex; gap:9px;}
+.guide-steps li .gs-n{flex:none; width:20px; height:20px; border-radius:50%; background:var(--accent-soft); color:var(--accent); font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:11px; display:flex; align-items:center; justify-content:center; margin-top:1px;}
+.guide-steps li .gs-t{flex:1; min-width:0; font-size:13px; color:var(--ink);}
+.guide-steps li .gs-t small{display:block; color:var(--ink-soft); font-size:11.5px; margin-top:2px; font-weight:400;}
+.guide-warn2{margin-top:10px; font-size:12px; background:var(--warn-soft); color:var(--warn); border-radius:8px; padding:7px 9px; font-weight:600;}
+.guide-src{margin-top:8px; font-size:10.5px; color:var(--ink-soft);}
+
+.tag{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; padding:1px 6px; border-radius:5px; margin-left:6px; vertical-align:1px; white-space:nowrap;}
+.tag.done{background:var(--good-soft); color:var(--good);}
+.tag.warn{background:var(--warn-soft); color:var(--warn);}
+.tag.later{background:var(--line); color:var(--ink-soft);}
+.tag.photo{background:var(--accent-soft); color:var(--accent);}
+
+.apptable{margin-top:10px; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:var(--paper-raised);}
+.app-row{display:flex; align-items:center; gap:10px; padding:10px 13px; font-size:13px;}
+.app-row + .app-row{border-top:1px solid var(--line);}
+.app-name{font-weight:600; min-width:118px;}
+.app-desc{flex:1; color:var(--ink-soft); font-size:12.5px;}
+.app-row a.linkbtn{margin:0; flex:none;}
+
+.reg-plain-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+
+.pay-table{margin-top:10px; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:var(--paper-raised);}
+.pay-row{display:flex; justify-content:space-between; padding:8px 12px; font-size:13px;}
+.pay-row + .pay-row{border-top:1px solid var(--line);}
+.pay-row span:last-child{font-family:'IBM Plex Mono',monospace; font-weight:600;}
+.pay-row.total{background:var(--accent-soft); color:var(--accent); font-weight:600;}
+
+.callout{margin-top:10px; background:var(--warn-soft); border:1px solid var(--warn); border-radius:10px; padding:10px 12px; font-size:13px;}
+.callout.script{background:var(--accent-soft); border-color:var(--accent); font-style:italic;}
+
+.tip{margin-top:9px; background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; padding:11px 13px; box-shadow:var(--shadow);}
+.tip h3{font-size:13.5px; font-weight:700; margin:0 0 6px;}
+.tip ul{margin:0; padding-left:18px; display:flex; flex-direction:column; gap:4px;}
+.tip li{font-size:12.5px; color:var(--ink);}
+.tip li b{color:var(--ink);}
+
+footer{margin-top:30px; padding-top:16px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;}
+.reset-btn{font:inherit; font-size:12px; background:none; border:1px solid var(--line); color:var(--ink-soft); padding:6px 11px; border-radius:99px; cursor:pointer;}
+.footnote{font-size:11px; color:var(--ink-soft);}
+
+@media (max-width:480px){
+  .wrap{padding:0 12px 56px;}
+  .app-row{flex-wrap:wrap; row-gap:8px;}
+  .app-name{min-width:0; width:100%;}
+  .app-desc{width:100%; flex:none;}
+  .app-row a.linkbtn{width:100%; justify-content:center;}
+  .field-grid{grid-template-columns:1fr;}
+  .item{padding:11px 12px;}
+  .item-check{width:24px; height:24px;}
+  .reg-head input[type=checkbox]{width:20px; height:20px; min-width:20px;}
+}
+.item-sub,.reg-plain,.app-desc,.tip li{overflow-wrap:break-word; word-break:break-word;}
+
+.title{display:flex; align-items:center; flex-wrap:wrap; gap:8px;}
+.mode-badge{display:inline-flex; align-items:center; gap:3px; font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:700; padding:2px 9px; border-radius:99px; background:var(--good-soft); color:var(--good); white-space:nowrap;}
+.mode-badge.parent{background:var(--accent-soft); color:var(--accent);}
+
+
+.share-parent-row{margin-top:11px;}
+.share-parent-btn{display:inline-flex; align-items:center; gap:6px; font:inherit; cursor:pointer; font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--accent); border-radius:99px; padding:6px 12px;}
+.parent-banner{margin-top:14px; background:var(--accent-soft); border:1px solid var(--accent); border-radius:10px; padding:11px 13px; font-size:12.5px; color:var(--ink); line-height:1.6;}
+.parent-banner b{color:var(--accent);}
+[data-parent-view="1"] .share-parent-row,[data-parent-view="1"] #resetBtn{display:none;}
+
+</style>
+</head>
+<body>
+<div class="xhs-toast" id="xhsToast">已复制，去小红书App搜索～</div>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="progress-row">
+      <div>
+        <div class="title">今日日程 & 须知<span class="mode-badge" id="modeBadge">🎓 学生端</span></div>
+        <div class="city-tag"><svg class="bee-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="13.5" rx="5" ry="6"/><path d="M7 11.5h10M7 14.5h10"/><path d="M12 7c-2-3-6-3-7-1 1 2 4 3 7 1z"/><path d="M12 7c2-3 6-3 7-1-1 2-4 3-7 1z"/><circle cx="12" cy="6" r="1.1" fill="currentColor" stroke="none"/></svg>曼彻斯特大学 · 红砖学府，溯源1824</div>
+      </div>
+      <div class="progress-num"><span id="doneCount">0</span>/<span id="totalCount">0</span></div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="navchips">
+      <a href="#sec-time">时间轴</a><a href="#sec-map">路线地图</a><a href="#sec-reg">学校注册</a><a href="#sec-life">生活开通</a><a href="#sec-apps">推荐App</a><a href="#sec-outdoor">校园/采购</a><a href="#sec-shop">采购清单</a><a href="#sec-tips">补充知识</a>
+    </div>
+    <div class="share-parent-row">
+      <button type="button" class="share-parent-btn" id="shareParentBtn">👨‍👩‍👧 分享进度给家长</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="card">
+    <div class="field-grid">
+      <div class="field"><label for="f-name">学生姓名</label><input id="f-name" type="text" value="王继然" placeholder="待补充"></div>
+      <div class="field"><label for="f-flight">航班号</label><input id="f-flight" type="text" value="HU753" placeholder="待补充"></div>
+      <div class="field"><label for="f-landing">落地时间</label><input id="f-landing" type="time" value="06:45"></div>
+      <div class="field"><label for="f-pax">人数</label>
+        <select id="f-pax"><option value="1">1人（Uber）</option><option value="2" selected>2人以上（7/9座车）</option></select>
+      </div>
+      <div class="field full"><label for="f-addr">住址</label><input id="f-addr" type="text" value="Flat 2601 Blade Tower, 15 Silvercroft Street, Manchester M15 4XP"></div>
+      <div class="field"><label for="f-plate">车牌号</label><input id="f-plate" type="text" placeholder="群里提前告知"></div>
+    </div>
+    <div class="card-foot">
+      <span class="end-time">预计完工：<b id="endTimeOut">16:15 左右</b></span>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:14px;">
+    <b>⚠️ 领钥匙前必须完成：Standing Order（标准转账）授权</b><br>
+    Settio物业管理（letting agent）明确要求：入住前必须用你自己的英国银行账户，按 Goodlord 租房文件里的收款信息设置好月租的 Standing Order，并<b>保留银行的确认凭证</b>（截图或确认邮件）。到 <b>Northspring Building</b> 领钥匙时需要出示，没有凭证不会放钥匙。
+    <br><br>
+    这意味着<b>银行账户最好已经提前开好</b>（HSBC/Monzo新用户审核通常要1–3个工作日，见下方③生活开通板块）。如果落地当天银行账户还没批下来或来不及设置，请务必<b>提前联系 Settio</b> 说明情况：Leonardo Arisco Corrado，<a href="tel:+441613835311">+44 (0)161 383 5311</a> / <a href="mailto:hello@settio.co.uk">hello@settio.co.uk</a>，问清楚是否可以延后提供凭证，避免到了现场却拿不到钥匙。
+    <details class="guide">
+      <summary>📖 Standing Order 设置完整步骤<span class="gcount">6步</span></summary>
+      <div class="guide-body">
+        <ol class="guide-steps">
+          <li><div class="gs-n">1</div><div class="gs-t">提前在 <b>Goodlord</b> 租房平台里找到房东/物业的收款信息（sort code、账号、收款人名称、付款备注通常是房产地址或租客姓名）</div></li>
+          <li><div class="gs-n">2</div><div class="gs-t">登录已开通的英国银行App（如HSBC UK），进入「Payments」→「Standing Orders」→「Set up a new standing order」</div></li>
+          <li><div class="gs-n">3</div><div class="gs-t">填入收款方 sort code、账号、收款人名称</div></li>
+          <li><div class="gs-n">4</div><div class="gs-t">填金额（月租）、首次扣款日期（通常是每月固定收租日）、频率选 <b>Monthly</b></div></li>
+          <li><div class="gs-n">5</div><div class="gs-t">确认提交，银行会生成一个确认页面/邮件，<b>截图或存成PDF保存好</b></div></li>
+          <li><div class="gs-n">6</div><div class="gs-t">把这份截图/确认信发给 Settio（邮件或短信均可）作为凭证，收到对方确认后再前往 Northspring Building 领钥匙</div></li>
+        </ol>
+        <div class="guide-warn2">⚠️ 银行账户开户本身也要1–3个工作日审核，务必尽早办理，不要等到落地当天才开始，否则可能来不及在领钥匙前完成整套流程。</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="overview">🗺️ 接机 → 领钥匙 → 入住 → 完成入学核验 → 生活开通 → 前往校园 → 校园附近吃午饭 → 公交经中国城到市中心采购 → 送你回住处，全程陪同到 <b>16:15</b> 左右。带 <span style="color:var(--link)">🔗</span> 的都是需要你登录官网/App完成的线上事项，标 <span style="color:var(--xhs)">📕</span> 的是可以去小红书搜关键词看图文/视频教程的地方。</div>
+
+  <div class="section" id="sec-time">
+    <h2>① 今日时间轴</h2>
+    <div class="sub">13步，从上往下就是你今天一整天的安排，完成一项可以打勾记录一下。具体操作细节见下面对应板块。</div>
+    <div class="flow" id="flow">
+
+      <div class="item"><div class="item-badge">1</div><div class="item-body"><div class="item-time">06:45 · HU753</div><div class="item-title">航班落地</div><div class="item-sub">欢迎抵达曼彻斯特！早上好已经在机场等你了。</div></div><input type="checkbox" class="item-check" id="s1"></div>
+
+      <div class="item"><div class="item-badge">2</div><div class="item-body"><div class="item-time">约07:45–08:15 · Pick Up Zone</div><div class="item-title">出关后与早上好会合</div><div class="item-sub">早上好会在 Pick Up Zone 举牌等你，确认人数后帮你一起搬行李。国际航班入境+提取行李通常需要45–75分钟，不用着急。</div></div><input type="checkbox" class="item-check" id="s2"></div>
+
+      <div class="item"><div class="item-badge">3</div><div class="item-body"><div class="item-time">约08:15–08:45</div><div class="item-title">前往 Northspring Building 领取钥匙</div><div class="item-sub">打车前往 70 Spring Gardens, M2 2BQ（letting agent Settio 办公室），车程约25–30分钟。<b>需出示 Standing Order 银行确认凭证</b>才能领钥匙，详见上方红字提醒。</div></div><input type="checkbox" class="item-check" id="s3"></div>
+
+      <div class="item"><div class="item-badge">4</div><div class="item-body"><div class="item-time">约08:45–09:10 · Blade Tower</div><div class="item-title">前往住处入住</div><div class="item-sub">从 Spring Gardens 前往 15 Silvercroft Street（Blade Tower），早上好陪你用刚领到的钥匙开门入住，再带你看一遍信箱、垃圾间、洗衣房这些生活设施。</div></div><input type="checkbox" class="item-check" id="s4"></div>
+
+      <div class="item"><div class="item-badge">5</div><div class="item-body"><div class="item-time">约09:10–09:55 · 今天最重要</div><div class="item-title">完成学校入学核验</div><div class="item-sub">这是今天必须完成的一步：登录My Manchester提交Student Right to Study，状态要变成Completed。早上好会在旁边协助你操作。</div><a class="linkbtn" href="#sec-reg">跳转看②板块详情</a></div><input type="checkbox" class="item-check" id="s5"></div>
+
+      <div class="item"><div class="item-badge">6</div><div class="item-body"><div class="item-time">约09:55–10:20</div><div class="item-title">生活开通</div><div class="item-sub">改一下Apple ID地址、下载几个常用App、确认银行账户/Standing Order状态、装上电话卡。</div><a class="linkbtn" href="#sec-life">跳转看③板块详情</a></div><input type="checkbox" class="item-check" id="s6"></div>
+
+      <div class="item"><div class="item-badge">7</div><div class="item-body"><div class="item-time">约10:20–10:55</div><div class="item-title">前往校园</div><div class="item-sub">Blade Tower距校园比学生宿舍区略远，步行约35分钟，建议打车或坐公交/电车前往，正好熟悉一下通勤路线。</div></div><input type="checkbox" class="item-check" id="s7"></div>
+
+      <div class="item"><div class="item-badge">8</div><div class="item-body"><div class="item-time">约10:55–12:05</div><div class="item-title">校园参观</div><div class="item-sub">图书馆、主教学楼、活动中心、你的学院楼，还有大家都爱拍照的网红墙。</div></div><input type="checkbox" class="item-check" id="s8"></div>
+
+      <div class="item"><div class="item-badge">9</div><div class="item-body"><div class="item-time">约12:05–13:00</div><div class="item-title">校园附近吃午饭</div><div class="item-sub">选面条、盖饭这类不用等太久的，好好吃一顿垫垫肚子。</div></div><input type="checkbox" class="item-check" id="s9"></div>
+
+      <div class="item"><div class="item-badge">10</div><div class="item-body"><div class="item-time">约13:00–13:15</div><div class="item-title">乘公交去市中心</div><div class="item-sub">沿牛津路（Oxford Road）方向坐公交，大概10–15分钟，路上会经过中国城，想逛的话可以在那顺路下车看看。</div></div><input type="checkbox" class="item-check" id="s10"></div>
+
+      <div class="item"><div class="item-badge">11</div><div class="item-body"><div class="item-time">约13:15–15:00</div><div class="item-title">市中心采购生活用品</div><div class="item-sub">按下面顺序逛，一次买齐，不用多跑：</div>
+        <ul class="reg-plain-list" style="margin-top:6px;">
+          <li>🏬 <b>Manchester Arndale Centre</b> —— 床品四件套、锅碗瓢盆、洗漱用品这类"开学第一波"</li>
+          <li>🥦 <b>Tesco Express</b> —— 日常生鲜和基础食材</li>
+          <li>🍱 <b>M&S Foodhall</b> —— 熟食和品质稍好的食材</li>
+          <li>🛍️ <b>Sainsbury's Local</b> —— 备选，营业时间更晚</li>
+          <li>🥢 <b>中国城生活百货</b> —— 酱料、调味品、中式锅具、方便面</li>
+        </ul>
+        <a class="linkbtn" href="#sec-outdoor">跳转看⑤板块详情（步行时间/地址）</a>
+      </div><input type="checkbox" class="item-check" id="s11"></div>
+
+      <div class="item"><div class="item-badge">12</div><div class="item-body"><div class="item-time">约15:00–15:35</div><div class="item-title">送你回住处</div><div class="item-sub">Blade Tower距市中心约1.5英里，优先坐公交/电车，也可以打车，比走路更省时间。</div></div><input type="checkbox" class="item-check" id="s12"></div>
+
+      <div class="item"><div class="item-badge">13</div><div class="item-body"><div class="item-time">约15:35–16:15</div><div class="item-title">今天的陪同结束</div><div class="item-sub">早上好会跟你确认一下还有没有别的需要，之后今天的陪同就结束啦。学业或生活上有问题，随时联系我们。</div></div><input type="checkbox" class="item-check" id="s13"></div>
+
+    </div>
+  </div>
+
+  <div class="section" id="sec-map">
+    <h2>🗺️ 今日路线地图</h2>
+    <div class="sub">今天一共5段路，比一般学生宿舍订单多了「先去领钥匙」这一段，点按钮直接在Google地图打开对应路线。</div>
+    <div class="apptable">
+      <div class="app-row"><span class="app-name">① 机场→领钥匙</span><span class="app-desc">Manchester Airport → Northspring Building, 70 Spring Gardens M2 2BQ，约13英里，打车约25–30分钟</span><a class="linkbtn" href="https://www.google.com/maps/dir/?api=1&origin=Manchester+Airport&destination=Northspring+Building+70+Spring+Gardens+Manchester+M2+2BQ&travelmode=driving" target="_blank" rel="noopener">查看路线</a></div>
+      <div class="app-row"><span class="app-name">② 领钥匙→住处</span><span class="app-desc">Northspring Building → Blade Tower, 15 Silvercroft St M15 4XP，约1英里，打车约8–10分钟</span><a class="linkbtn" href="https://www.google.com/maps/dir/?api=1&origin=Northspring+Building+70+Spring+Gardens+Manchester+M2+2BQ&destination=Blade+Tower+15+Silvercroft+Street+Manchester+M15+4XP&travelmode=driving" target="_blank" rel="noopener">查看路线</a></div>
+      <div class="app-row"><span class="app-name">③ 住处→校园</span><span class="app-desc">Blade Tower → University of Manchester (Oxford Road)，约2英里，步行约35分钟/公交约15分钟</span><a class="linkbtn" href="https://www.google.com/maps/dir/?api=1&origin=Blade+Tower+15+Silvercroft+Street+Manchester+M15+4XP&destination=University+of+Manchester+Oxford+Road+Manchester&travelmode=transit" target="_blank" rel="noopener">查看路线</a></div>
+      <div class="app-row"><span class="app-name">④ 校园→市中心</span><span class="app-desc">University of Manchester → Piccadilly Gardens，约1.3英里，公交约10–15分钟</span><a class="linkbtn" href="https://www.google.com/maps/dir/?api=1&origin=University+of+Manchester+Oxford+Road+Manchester&destination=Piccadilly+Gardens+Manchester&travelmode=transit" target="_blank" rel="noopener">查看路线</a></div>
+      <div class="app-row"><span class="app-name">⑤ 市中心→住处</span><span class="app-desc">Piccadilly Gardens → Blade Tower，约1.5英里，公交/电车约10分钟</span><a class="linkbtn" href="https://www.google.com/maps/dir/?api=1&origin=Piccadilly+Gardens+Manchester&destination=Blade+Tower+15+Silvercroft+Street+Manchester+M15+4XP&travelmode=transit" target="_blank" rel="noopener">查看路线</a></div>
+    </div>
+    <div class="linkrow" style="margin-top:10px;">
+      <a class="linkbtn" href="https://www.google.com/maps/dir/?api=1&origin=Manchester+Airport&destination=Blade+Tower+15+Silvercroft+Street+Manchester+M15+4XP&waypoints=Northspring+Building+70+Spring+Gardens+Manchester+M2+2BQ%7CUniversity+of+Manchester+Oxford+Road+Manchester%7CPiccadilly+Gardens+Manchester&travelmode=transit" target="_blank" rel="noopener">🗺️ 一键打开今日全部路线</a>
+    </div>
+    <div class="reg-note">⚠️ 距离/时间为估算，实际路况请以Google地图当天显示为准。</div>
+  </div>
+
+  <div class="section" id="sec-reg">
+    <h2>② 学校注册完整流程</h2>
+    <div class="sub">曼大注册一共10步，按实际顺序列出，标好哪些「应该已完成」「今天必须做」「以后再做」。</div>
+
+    <div class="reg-block">
+      <div class="reg-head"><input type="checkbox" id="r-pre"><label for="r-pre">步骤1–3：登机前应已完成，到场花1分钟确认<span class="tag done">应已完成</span></label></div>
+      <ul class="reg-steps">
+        <li>步骤1 IT账号激活：能正常登录 My Manchester / 学校邮箱即代表已完成。</li>
+        <li>步骤2 Applicant Right to Study：offer阶段应已在Self-Service上传护照等材料。</li>
+        <li>步骤3 材料准备：确保你手头有 <b>UKVI账号</b>、<b>「S」share code</b>（90天内有效）、护照、入境凭证（登机牌/电子机票）。</li>
+      </ul>
+      <div class="linkrow">
+        <a class="linkbtn" href="https://www.studentsupport.manchester.ac.uk/immigration-and-visas/right-to-study-check/" target="_blank" rel="noopener">官方说明</a>
+      </div>
+      <div class="reg-note">⚠️ 如果UKVI账号或share code还没弄好也没关系，现场就能在gov.uk上生成一个，几分钟就好，早上好会帮你一起弄。</div>
+    </div>
+
+    <div class="reg-block">
+      <div class="reg-head"><input type="checkbox" id="r-4"><label for="r-4">步骤4：到英国后完成 Student Right to Study<span class="tag warn">今天必须完成</span></label></div>
+      <ol class="reg-steps">
+        <li>登录 <b>My Manchester</b></li>
+        <li>Upload Passport —— 上传护照扫描件（JPG/PNG/PDF，≤10MB）</li>
+        <li>Enter Share Code —— 填入步骤3准备的「S」share code</li>
+        <li>Confirm Entry Date —— 选择实际入境英国的日期</li>
+        <li>提交，确认状态变成 <b>Completed</b>（若显示Under review，耐心等确认邮件就好）</li>
+      </ol>
+      <div class="linkrow">
+        <a class="linkbtn" href="https://login.manchester.ac.uk/" target="_blank" rel="noopener">登录 My Manchester</a>
+        <a class="linkbtn" href="https://www.gov.uk/evisa/view-evisa-get-share-code-prove-immigration-status" target="_blank" rel="noopener">生成 Share Code</a>
+        <button type="button" class="linkbtn xhs copy-xhs" data-kw="曼大 Right to Study">📕 复制「曼大 Right to Study」</button>
+      </div>
+
+      <details class="guide">
+        <summary>📖 Right to Study 完整实操步骤<span class="gcount">8步</span></summary>
+        <div class="guide-body">
+          <ol class="guide-steps">
+            <li><div class="gs-n">1</div><div class="gs-t">登录 <b>My Manchester</b>，进入 Self-Service，会看到 "Right to Study" 待办提醒</div></li>
+            <li><div class="gs-n">2</div><div class="gs-t">点击 "Complete Right to Study Check"（或 Upload documents）进入表单</div></li>
+            <li><div class="gs-n">3</div><div class="gs-t">上传护照个人信息页照片<small>清晰、四角完整、不反光即可，JPG/PNG/PDF均可</small></div></li>
+            <li><div class="gs-n">4</div><div class="gs-t">在 gov.uk 生成一个"S"开头的 share code（90天内有效），填入表单</div></li>
+            <li><div class="gs-n">5</div><div class="gs-t">上传入境凭证<small>登机牌、电子机票行程单或护照盖章页均可，选一个能证明入境日期的就行</small></div></li>
+            <li><div class="gs-n">6</div><div class="gs-t">确认实际入境英国的日期</div></li>
+            <li><div class="gs-n">7</div><div class="gs-t">提交后状态先显示 "Under review"，通常几小时到1个工作日内会变成 <b>Completed</b></div></li>
+            <li><div class="gs-n">8</div><div class="gs-t">变成Completed后，Registration里原本冻结的第10步（Financial Registration）才会解锁，可以继续往下办</div></li>
+          </ol>
+          <div class="guide-warn2">⚠️ share code和入境凭证有效期都有限，建议落地当天就现场生成/提交，不要拖。</div>
+        </div>
+      </details>
+      <div class="reg-note">只有这一步Completed，后面的注册和Canvas才会正式开放，所以务必等状态确认了再离开。</div>
+    </div>
+
+    <div class="reg-block">
+      <div class="reg-head"><label style="font-weight:600;">步骤5–8：以后会用到，今天先讲清楚就好<span class="tag later">以后再做</span></label></div>
+      <div class="reg-plain"><span class="k">步骤5</span>：入学当月1日起会收到邀请邮件→登录My Manchester开始Online Registration（建议用电脑操作）。</div>
+      <div class="reg-plain"><span class="k">步骤6</span>：依次填personal/contact/emergency details和programme details，勾选declaration，完成1–9步（进度到89%）。</div>
+      <div class="reg-plain"><span class="k">步骤7</span>：自动进入第10步Financial Registration，选缴费方式（已付/立即付/分期/赞助），需要sponsor letter就上传，完成后才算 <b>Fully registered</b>。</div>
+
+      <details class="guide">
+        <summary>📖 Financial Registration（缴费）完整步骤<span class="gcount">8步</span></summary>
+        <div class="guide-body">
+          <ol class="guide-steps">
+            <li><div class="gs-n">1</div><div class="gs-t">登录 My Manchester → 进入 Student Centre/Campus Solutions，看到 "You have not completed Registration" 提示，点 <b>Register</b></div></li>
+            <li><div class="gs-n">2</div><div class="gs-t">依次确认 Step 1–9（一般会显示 Completed），进入 <b>Step 10 Financial Registration</b></div></li>
+            <li><div class="gs-n">3</div><div class="gs-t">二选一：<b>Pay in Full</b>（一次性付清）或 <b>Pay By Instalments</b>（分期）</div></li>
+            <li><div class="gs-n">4</div><div class="gs-t">阅读并同意 "Payment Pending" 条款和条件</div></li>
+            <li><div class="gs-n">5</div><div class="gs-t">填写 Payer Details：国家、邮编、地址、姓名、邮箱、电话</div></li>
+            <li><div class="gs-n">6</div><div class="gs-t">选一次性付款：填 Card Details（卡类型/卡号/安全码/有效期）→ Review and Confirm → 可能会跳出3D验证（手机短信验证码）</div></li>
+            <li><div class="gs-n">7</div><div class="gs-t">选分期：先选分期计划 → 确认扣款日期和每期金额 → 同意条款 → 完成首笔付款 → 设置 <b>Direct Debit</b>（英国银行卡自动扣款授权）</div></li>
+            <li><div class="gs-n">8</div><div class="gs-t">完成后返回确认页面，进度变为 100%，也就是 <b>Fully Registered</b></div></li>
+          </ol>
+          <div class="guide-warn2">⚠️ 分期需要一张英国本地银行卡开通Direct Debit（所以建议先办好HSBC/Monzo再选分期）；扣款失败会有 <b>£25</b> 违约金(default levy)，务必保证扣款日账户余额充足。</div>
+        </div>
+      </details>
+
+      <div class="reg-plain"><span class="k">步骤8</span>：全部10步完成后，学校发邮件邀请领Student Card。收到「Invitation to Book A Student Card Collection」邮件后，点邮件里<b>专属链接</b>（不可分享，需用曼大邮箱）预约时间段，带预约证明去 <b>The Main Library, Burlington Street</b> 领取（周末、周一不可约）。</div>
+
+      <details class="guide">
+        <summary>📖 学生卡预约领取完整步骤<span class="gcount">7步</span></summary>
+        <div class="guide-body">
+          <ol class="guide-steps">
+            <li><div class="gs-n">1</div><div class="gs-t">完成全部10步注册后，会收到「Invitation to Book A Student Card Collection」邮件，发到你的<b>曼大邮箱</b></div></li>
+            <li><div class="gs-n">2</div><div class="gs-t">点邮件里的专属预约链接<small>该链接不能转发/分享给别人，必须用自己的曼大邮箱登录使用</small></div></li>
+            <li><div class="gs-n">3</div><div class="gs-t">在日历上选一个5分钟的空闲时段<small>目前周末和周一通常不开放预约，建议约在BRP/eVisa相关事务前后，一次跑一趟</small></div></li>
+            <li><div class="gs-n">4</div><div class="gs-t">填写 Name / Email；Address、Phone、Notes 为选填项</div></li>
+            <li><div class="gs-n">5</div><div class="gs-t">填写 Student ID Number，勾选两个确认选项后点击 <b>Book</b></div></li>
+            <li><div class="gs-n">6</div><div class="gs-t">预约成功会收到确认邮件，纸质打印或手机上直接出示电子版都可以，记得带着去</div></li>
+            <li><div class="gs-n">7</div><div class="gs-t">到 <b>The Main Library, Burlington Street</b> 现场领取；照片可提前在官网上传，不需要正式证件照，露出肩膀、稍微模糊都没关系</div></li>
+          </ol>
+        </div>
+      </details>
+
+      <div class="linkrow">
+        <a class="linkbtn" href="https://www.welcome.manchester.ac.uk/get-ready/become-a-student/register-as-a-student/ten-steps/" target="_blank" rel="noopener">官方十步说明</a>
+        <a class="linkbtn" href="https://www.studentsupport.manchester.ac.uk/student-services/studentcards/" target="_blank" rel="noopener">Student Card说明</a>
+        <button type="button" class="linkbtn xhs copy-xhs" data-kw="曼大 在线注册 攻略">📕 复制「曼大 在线注册 攻略」</button>
+      </div>
+      <div class="reg-note">⚠️ 2024年底起BRP卡已停发，全部改用eVisa，不需要再单独约BRP。</div>
+    </div>
+  </div>
+
+  <div class="section" id="sec-life">
+    <h2>③ 生活开通</h2>
+    <div class="sub">Apple ID / 常用App / 银行卡 / 电话卡。时间紧的话优先弄Apple ID和下载App，其余可以留到你自己晚上慢慢弄。</div>
+
+    <div class="reg-block">
+      <div class="reg-head"><label style="font-weight:600;">Apple ID 切换英国区</label></div>
+      <div class="reg-plain">优先只改收货地址，不填英国银行卡/电话号码；或退出重新用英国号码注册一个新ID。</div>
+
+      <details class="guide">
+        <summary>📖 Apple ID 改区完整步骤<span class="gcount">9步</span></summary>
+        <div class="guide-body">
+          <ol class="guide-steps">
+            <li><div class="gs-n">1</div><div class="gs-t">打开手机「设置」→ 点最上方自己的 Apple ID 名字</div></li>
+            <li><div class="gs-n">2</div><div class="gs-t">进入「媒体与购买项目」→「查看账户」<small>可能需要输入Apple ID密码验证一次</small></div></li>
+            <li><div class="gs-n">3</div><div class="gs-t">找到「国家/地区」→ 点「更改国家或地区」</div></li>
+            <li><div class="gs-n">4</div><div class="gs-t">选择「United Kingdom」</div></li>
+            <li><div class="gs-n">5</div><div class="gs-t">阅读并同意英国区新的条款和条件</div></li>
+            <li><div class="gs-n">6</div><div class="gs-t">付款方式选「无」（None），不绑定任何银行卡</div></li>
+            <li><div class="gs-n">7</div><div class="gs-t">填写一个英国收货地址<small>可以先填学校/住处地址</small></div></li>
+            <li><div class="gs-n">8</div><div class="gs-t">确认提交，等几秒钟生效，App Store会切换成英国区</div></li>
+            <li><div class="gs-n">9</div><div class="gs-t">生效后如果不想影响国区已购的App/记录，也可以选择不改现有ID，而是<b>退出登录，用英国手机号直接注册一个全新的ID</b></div></li>
+          </ol>
+        </div>
+      </details>
+
+      <div class="linkrow">
+        <button type="button" class="linkbtn xhs copy-xhs" data-kw="Apple ID 改地址教程">📕 复制「Apple ID 改地址教程」（视频版）</button>
+      </div>
+    </div>
+
+    <div class="reg-block">
+      <div class="reg-head"><label style="font-weight:600;">开通英国银行账户</label></div>
+      <div class="reg-plain">HSBC与Monzo均支持线上开户，通常不需要bank letter，年流水填10–20K，不要填夸张数字。</div>
+
+      <details class="guide">
+        <summary>📖 HSBC UK 线上开户完整步骤<span class="gcount">12步</span></summary>
+        <div class="guide-body">
+          <ol class="guide-steps">
+            <li><div class="gs-n">1</div><div class="gs-t">下载「HSBC UK Mobile Banking」App<small>注意认准UK版，不是国内汇丰App</small></div></li>
+            <li><div class="gs-n">2</div><div class="gs-t">打开App选「I'm new to HSBC」，按提示选择所在地区</div></li>
+            <li><div class="gs-n">3</div><div class="gs-t">填个人信息：姓名、出生日期、国籍等</div></li>
+            <li><div class="gs-n">4</div><div class="gs-t">选择开户原因：留学生直接选 <b>「You're moving to the UK to study in the next 6 months」</b></div></li>
+            <li><div class="gs-n">5</div><div class="gs-t">设置一个6位数字的 Mobile Banking PIN 密码</div></li>
+            <li><div class="gs-n">6</div><div class="gs-t">身份验证选择 <b>「Passport」</b>（比选driving licence更方便）→ 拍摄护照资料页，系统自动识别信息</div></li>
+            <li><div class="gs-n">7</div><div class="gs-t">输入英国手机号，接收并填入短信验证码</div></li>
+            <li><div class="gs-n">8</div><div class="gs-t">填写英国居住地址：国家选UK，公寓名/门牌号、街道、城镇、邮编都要填<small>需要和之后收到的Bank Letter上完全一致</small></div></li>
+            <li><div class="gs-n">9</div><div class="gs-t">填写税务信息：国家选 China，Tax Identification Number(TIN) 填身份证号；年收入随便填一个合理数字（如£2,000）</div></li>
+            <li><div class="gs-n">10</div><div class="gs-t">提交申请，等待审核<small>通常1–3个工作日内会收到邮件确认</small></div></li>
+            <li><div class="gs-n">11</div><div class="gs-t">通过后显示「Nicely done, your account is now open」，可查看 Account no. 和 Sort code</div></li>
+            <li><div class="gs-n">12</div><div class="gs-t">陆续收到两个信封：银行卡（需激活）+ PIN码；用App或电话激活银行卡后，还可以在App里找到「Add to Apple Pay」直接绑定手机支付</div></li>
+          </ol>
+        </div>
+      </details>
+
+      <div class="linkrow">
+        <a class="linkbtn" href="https://www.hsbc.co.uk/international/studying-in-the-uk/" target="_blank" rel="noopener">HSBC留学生开户</a>
+        <a class="linkbtn" href="https://monzo.com/" target="_blank" rel="noopener">Monzo（App内完成）</a>
+        <button type="button" class="linkbtn xhs copy-xhs" data-kw="HSBC Monzo 学生开户教程">📕 复制「HSBC/Monzo 开户教程」（视频版）</button>
+      </div>
+    </div>
+
+    <div class="reg-block">
+      <div class="reg-head"><label style="font-weight:600;">电话卡</label></div>
+      <div class="reg-plain">早上好会给你一张Cmlink电话卡，插卡后关注微信公众号「小移在英国」，可以帮你挑合适的套餐。</div>
+      <div class="linkrow">
+        <a class="linkbtn" href="https://www.cmlink.com/uk/en/" target="_blank" rel="noopener">CMLink官网</a>
+        <button type="button" class="linkbtn xhs copy-xhs" data-kw="Cmlink 套餐选择">📕 复制「Cmlink 套餐选择」</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="sec-apps">
+    <h2>④ 推荐下载 App 清单</h2>
+    <div class="sub">核心必装，建议在生活开通环节顺手一起下载好。</div>
+    <div class="apptable">
+      <div class="app-row"><span class="app-name">WhatsApp</span><span class="app-desc">海外主流联系方式，学校/房东常用</span><a class="linkbtn" href="https://www.whatsapp.com/download" target="_blank" rel="noopener">下载</a></div>
+      <div class="app-row"><span class="app-name">Instagram</span><span class="app-desc">社交，学校社团/活动信息</span><a class="linkbtn" href="https://www.instagram.com/" target="_blank" rel="noopener">下载</a></div>
+      <div class="app-row"><span class="app-name">Google Duo</span><span class="app-desc">视频通话（已并入Google Meet）</span><a class="linkbtn" href="https://meet.google.com/" target="_blank" rel="noopener">打开</a></div>
+      <div class="app-row"><span class="app-name">Google 地图</span><span class="app-desc">导航、公交路线</span><a class="linkbtn" href="https://maps.google.com/" target="_blank" rel="noopener">打开</a></div>
+      <div class="app-row"><span class="app-name">TrainPal</span><span class="app-desc">火车票，中文界面友好，学生常用</span><a class="linkbtn" href="https://www.mytrainpal.com/" target="_blank" rel="noopener">下载</a></div>
+      <div class="app-row"><span class="app-name">Trainline</span><span class="app-desc">英国官方主流火车票平台</span><a class="linkbtn" href="https://www.thetrainline.com/" target="_blank" rel="noopener">下载</a></div>
+      <div class="app-row"><span class="app-name">Uber</span><span class="app-desc">打车</span><a class="linkbtn" href="https://www.uber.com/gb/en/" target="_blank" rel="noopener">下载</a></div>
+      <div class="app-row"><span class="app-name">熊猫外卖</span><span class="app-desc">HungryPanda，中式外卖首选</span><a class="linkbtn" href="https://www.hungrypanda.co/" target="_blank" rel="noopener">下载</a></div>
+      <div class="app-row"><span class="app-name">JoyBuy</span><span class="app-desc">京东海外，日用百货网购</span><a class="linkbtn" href="https://www.joybuy.co.uk/" target="_blank" rel="noopener">下载</a></div>
+      <div class="app-row"><span class="app-name">Amazon UK</span><span class="app-desc">综合网购，当日/次日达</span><a class="linkbtn" href="https://www.amazon.co.uk/" target="_blank" rel="noopener">下载</a></div>
+      <div class="app-row"><span class="app-name">UNiDAYS</span><span class="app-desc">学生认证优惠App，星巴克每周二凭码2磅一杯就是靠它</span><a class="linkbtn" href="https://www.myunidays.com/GB/en-GB" target="_blank" rel="noopener">下载</a></div>
+    </div>
+    <div class="sub" style="margin-top:12px;">可选补充（视学生需要）：</div>
+    <div class="apptable">
+      <div class="app-row"><span class="app-name">Citymapper</span><span class="app-desc">公交/地铁路线规划，配合Google地图</span><a class="linkbtn" href="https://citymapper.com/" target="_blank" rel="noopener">下载</a></div>
+      <div class="app-row"><span class="app-name">NHS App</span><span class="app-desc">查看GP信息、预约、处方</span><a class="linkbtn" href="https://www.nhs.uk/nhs-app/" target="_blank" rel="noopener">下载</a></div>
+      <div class="app-row"><span class="app-name">Deliveroo / Just Eat</span><span class="app-desc">西式外卖补充选择</span><a class="linkbtn" href="https://deliveroo.co.uk/" target="_blank" rel="noopener">下载</a></div>
+    </div>
+  </div>
+
+  <div class="section" id="sec-outdoor">
+    <h2>⑤ 校园参观与市中心一站式采购</h2>
+    <div class="reg-block">
+      <div class="reg-head"><label style="font-weight:600;">🛒 住处周边采购点（从 Blade Tower 出发，Deansgate/Spinningfields一带）</label></div>
+      <ul class="reg-plain-list">
+        <li>🏬 <b>Manchester Arndale Centre</b>（市中心，采购环节会去）—— 大型商场，Primark/Boots/家居杂货一次买齐，最适合买床品四件套、锅碗瓢盆、洗漱用品这类"开学第一波"采购。</li>
+        <li>🥦 <b>Tesco Express（Deansgate一带）</b> —— 离住处较近，日常生鲜和基础食材首选，具体门店位置以Google地图当天定位为准。</li>
+        <li>🍱 <b>M&S Simply Food（Spinningfields）</b> —— 熟食和品质稍好的食材。</li>
+        <li>🛍️ <b>Sainsbury's Local（Deansgate一带）</b> —— 备选，营业时间通常更晚。</li>
+        <li>🥢 <b>中国城生活百货</b>（George Street/Faulkner Street一带）—— 酱料、调味品、中式锅具、方便面，市中心采购环节顺路可到。</li>
+      </ul>
+      <div class="reg-note">⚠️ 以上步行时间为估算，出发前建议现场用Google地图核实实际路线和门店营业时间。</div>
+    </div>
+  </div>
+
+  <div class="section" id="sec-shop">
+    <h2>🛍️ 留学生建议采购清单</h2>
+    <p class="section-desc" style="margin:-4px 0 12px;font-size:13px;color:var(--muted,#8a8a8a);">今天在①板块第11项的市中心采购环节，建议照着下面的清单买，避免来回补货。</p>
+    <div class="tip">
+      <h3>🛏️ 寝具 & 收纳</h3>
+      <ul>
+        <li>床单/被套/枕套四件套（买前最好现场量一下Blade Tower床垫尺寸，私人公寓常见Double/King不等）</li>
+        <li>枕头、被子/夏被（如果没有配）</li>
+        <li>晾衣架、collapsible洗衣篮</li>
+        <li>简单收纳盒/真空压缩袋</li>
+      </ul>
+    </div>
+    <div class="tip">
+      <h3>🧴 洗漱 & 个护</h3>
+      <ul>
+        <li>洗发水、沐浴露、牙刷牙膏、毛巾（浴巾+洗脸巾）</li>
+        <li>常用护肤品、纸巾/湿巾、卫生用品</li>
+        <li>吹风机（英标插头或带转换插头）</li>
+      </ul>
+    </div>
+    <div class="tip">
+      <h3>🍳 厨房 & 餐具</h3>
+      <ul>
+        <li>锅具1–2个（炒锅+奶锅够用）、菜刀+砧板</li>
+        <li>碗筷、水杯、保鲜盒</li>
+        <li>基础调味料：油盐酱醋，喜欢做饭的可以在中国城补充中式调味品</li>
+        <li>电水壶（英标插头，英国自来水可直饮但很多人还是习惯烧开）</li>
+      </ul>
+    </div>
+    <div class="tip">
+      <h3>🔌 生活电器 & 转换插头</h3>
+      <ul>
+        <li><b>英标转换插头/插排</b>（如果从国内带电器来，这个必须提前买或第一天就买）</li>
+        <li>台灯（不少公寓顶灯偏暗）</li>
+        <li>延长线/插线板（英标专用，不要用国内插排接转换头长期使用）</li>
+      </ul>
+    </div>
+    <div class="tip">
+      <h3>💊 常备药 & 应急</h3>
+      <ul>
+        <li>常用感冒药、肠胃药、创可贴（英国药店Boots也能买到基础OTC药品）</li>
+        <li>体温计、常用慢性病药（处方药记得带够，或提前了解英国就医开药流程）</li>
+        <li>雨伞/雨衣（曼彻斯特常年多雨，这个真的高频用）</li>
+      </ul>
+    </div>
+    <div class="tip">
+      <h3>🍚 食材 & 零食</h3>
+      <ul>
+        <li>大米/面条等主食（中国城或亚洲超市更全，Tesco/Sainsbury's也有基础款）</li>
+        <li>喜欢的国内零食/速食（第一周还没完全适应前应急很好用）</li>
+        <li>保质期长的蔬果（土豆、洋葱、胡萝卜）先囤一点，后续再按需补充</li>
+      </ul>
+    </div>
+    <div class="reg-note">💡 不用一次买齐：床品、插头转换器、洗漱用品建议第一天必买；厨房用品和食材可以按接下来几天的需求慢慢补。</div>
+  </div>
+
+  <div class="section" id="sec-tips">
+    <h2>⑥ 补充知识 · 不急着今天讲完</h2>
+    <div class="tip">
+      <h3>🏥 医疗 & 紧急电话</h3>
+      <ul>
+        <li>尽早注册 <b>GP</b>（社区全科诊所）：不用护照/签证/地址证明，住处地址直接填，约5个工作日生效。</li>
+        <li><b>999</b>生命危险；<b>111</b>NHS非急诊咨询；<b>101</b>非紧急报警。</li>
+        <li>IHS已随签证预缴，GP看病免费；但<b>英格兰拿处方药另收费</b>，不要以为全免。</li>
+      </ul>
+
+      <details class="guide">
+        <summary>📖 GP在线注册完整步骤<span class="gcount">14步</span></summary>
+        <div class="guide-body">
+          <ol class="guide-steps">
+            <li><div class="gs-n">1</div><div class="gs-t">打开 nhs.uk → Find a GP，输入你的邮编（住处邮编）</div></li>
+            <li><div class="gs-n">2</div><div class="gs-t">从列表里选一个离得近、评分高、且显示「Accepting new patients」的诊所，点「Register online with this GP」</div></li>
+            <li><div class="gs-n">3</div><div class="gs-t">「Who is registering with a GP?」选 <b>Myself</b></div></li>
+            <li><div class="gs-n">4</div><div class="gs-t">有无NHS账号：没有就选「Do not use account」，直接手动填资料</div></li>
+            <li><div class="gs-n">5</div><div class="gs-t">依次填姓名、出生日期；「Do you know your NHS number?」没有就选「No, continue without」</div></li>
+            <li><div class="gs-n">6</div><div class="gs-t">「是否首次在UK注册GP」选 <b>Yes</b>（新生一般都是首次）</div></li>
+            <li><div class="gs-n">7</div><div class="gs-t">核对个人信息 → 填写地址：「Do you have an address in the UK?」选Yes，输入邮编后从列表里勾选自己的门牌号（别选错）</div></li>
+            <li><div class="gs-n">8</div><div class="gs-t">填联系方式：电话、邮箱（均为选填，但建议填，方便诊所联系你）</div></li>
+            <li><div class="gs-n">9</div><div class="gs-t">选择性别（按NHS记录）；民族一栏可选「Asian or Asian British」→「Chinese」，或直接选「Prefer not to say」</div></li>
+            <li><div class="gs-n">10</div><div class="gs-t">紧急联系人可以填国内家人（号码记得加 <b>+86</b>），也可以选 No 跳过</div></li>
+            <li><div class="gs-n">11</div><div class="gs-t">出生地（Where were you born?）填 China；「是否最近从其他国家搬来英国」选 Yes</div></li>
+            <li><div class="gs-n">12</div><div class="gs-t">「是否已缴纳Immigration Health Surcharge」：留学生签证一般已随签证费预缴，选 Yes</div></li>
+            <li><div class="gs-n">13</div><div class="gs-t">健康问卷（过敏、心理健康、残疾、是否有carer、身高体重、饮酒吸烟史等）按个人真实情况填，不确定的都可以选「No」或「Prefer not to say」</div></li>
+            <li><div class="gs-n">14</div><div class="gs-t">提交后显示「Application complete」，一般<b>5个工作日</b>内完成注册；有紧急情况先打111或用NHS 111 online，不用等GP注册完成</div></li>
+          </ol>
+        </div>
+      </details>
+
+      <div class="linkrow">
+        <a class="linkbtn" href="https://www.nhs.uk/nhs-services/gps/how-to-register-with-a-gp-surgery/" target="_blank" rel="noopener">注册GP（NHS官网）</a>
+        <button type="button" class="linkbtn xhs copy-xhs" data-kw="英国 GP注册 教程">📕 复制「英国 GP注册 教程」（视频版）</button>
+      </div>
+    </div>
+    <div class="tip">
+      <h3>🛂 签证近况</h3>
+      <ul>
+        <li>BRP卡已于2024年底停发，身份全部记录在<b>eVisa</b>，用UKVI账号在线查看。</li>
+        <li>护照换新后记得同步UKVI账号；「S」share code不能和工作/租房用的share code混用。</li>
+        <li>入境后<b>不再需要去警局做警察登记</b>，这项要求已取消。</li>
+      </ul>
+    </div>
+    <div class="tip">
+      <h3>💼 打工 / 房租相关</h3>
+      <ul>
+        <li>Student visa一般学期内每周最多打工<b>20小时</b>，假期可全职，具体以CAS/eVisa条件为准。</li>
+        <li>Blade Tower是私人租赁公寓（非学校认证学生公寓），<b>不会自动豁免</b> Council Tax；如果全屋住客都是全日制学生，需要自己申请Full-Time Student Council Tax Exemption（找学校开Student Status Letter，交给曼城市议会）。</li>
+        <li>只看直播电视或BBC iPlayer才需要<b>TV Licence</b>，纯点播内容不需要。</li>
+      </ul>
+      <div class="linkrow">
+        <a class="linkbtn" href="https://www.studentsupport.manchester.ac.uk/student-services/council-tax/" target="_blank" rel="noopener">Council Tax豁免说明</a>
+        <a class="linkbtn" href="https://www.tvlicensing.co.uk/check-if-you-need-one" target="_blank" rel="noopener">TV Licence自查</a>
+      </div>
+    </div>
+    <div class="tip">
+      <h3>🛟 遇到问题找谁</h3>
+      <ul>
+        <li>签证/注册类问题 → <b>Student Support / International Advice team</b>。</li>
+        <li>安全/骚扰事件 → <b>Report + Support</b>；深夜情绪不好 → <b>Nightline</b>。</li>
+        <li>住处安全：不要遮挡烟雾报警器、不用违规大功率电器；贵重物品确认租房合同里的保险范围，不够就自行买contents insurance。</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footnote">勾选进度保存在本机浏览器，仅本机可见。</span>
+    <button class="reset-btn" id="resetBtn">重置</button>
+  </footer>
+  <div class="city-tag" style="justify-content:center; margin-top:14px; opacity:.7;"><svg class="bee-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="13.5" rx="5" ry="6"/><path d="M7 11.5h10M7 14.5h10"/><path d="M12 7c-2-3-6-3-7-1 1 2 4 3 7 1z"/><path d="M12 7c2-3 6-3 7-1-1 2-4 3-7 1z"/><circle cx="12" cy="6" r="1.1" fill="currentColor" stroke="none"/></svg>Made with Manchester spirit · 工蜂精神</div>
+
+</div>
+
+<script>
+(function(){
+  var STORE_KEY = 'pp-client-wangjiran-v1';
+  function load(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e){ return {}; } }
+  function save(d){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(d)); } catch(e){} }
+
+  var fieldIds = ['f-name','f-flight','f-landing','f-pax','f-addr','f-plate'];
+  var checks = Array.prototype.slice.call(document.querySelectorAll('.item-check, .reg-head input[type=checkbox]'));
+  var state = load();
+
+  fieldIds.forEach(function(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    if(state.fields && state.fields[id] !== undefined && state.fields[id] !== ''){ el.value = state.fields[id]; }
+    el.addEventListener('input', persistFields);
+    el.addEventListener('change', persistFields);
+  });
+  function persistFields(){
+    var s = load(); s.fields = s.fields || {};
+    fieldIds.forEach(function(id){ var el=document.getElementById(id); if(el) s.fields[id]=el.value; });
+    save(s); updateEndTime();
+  }
+
+  checks.forEach(function(cb){
+    if(state.checks && state.checks[cb.id]){
+      cb.checked = true;
+      var host = cb.closest('.item') || cb.closest('.reg-block');
+      if(host) host.classList.add('done');
+    }
+    cb.addEventListener('change', function(){
+      var host = cb.closest('.item') || cb.closest('.reg-block');
+      if(host) host.classList.toggle('done', cb.checked);
+      var s = load(); s.checks = s.checks || {}; s.checks[cb.id] = cb.checked; save(s);
+      updateProgress();
+    });
+  });
+
+  function updateProgress(){
+    var total = checks.length, done = checks.filter(function(c){return c.checked;}).length;
+    document.getElementById('totalCount').textContent = total;
+    document.getElementById('doneCount').textContent = done;
+    document.getElementById('progressFill').style.width = (total? done/total*100:0) + '%';
+  }
+
+  function updateEndTime(){
+    var landing = document.getElementById('f-landing').value;
+    var out = document.getElementById('endTimeOut');
+    if(!landing){ out.textContent = '16:15 左右'; return; }
+    var p = landing.split(':'); var h=parseInt(p[0],10), m=parseInt(p[1],10);
+    var total = ((h*60+m+570)%1440+1440)%1440;
+    var eh=Math.floor(total/60), em=total%60;
+    out.textContent = (eh<10?'0':'')+eh+':'+(em<10?'0':'')+em+' 左右';
+  }
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    if(!confirm('确定重置吗？勾选记录会清空。')) return;
+    localStorage.removeItem(STORE_KEY); location.reload();
+  });
+
+  updateProgress(); updateEndTime();
+
+  var toast = document.getElementById('xhsToast');
+  var toastTimer = null;
+  function showToast(text){
+    toast.textContent = text;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 1800);
+  }
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    var ok = false;
+    try{ ok = document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta);
+    return ok;
+  }
+  Array.prototype.slice.call(document.querySelectorAll('.copy-xhs')).forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var kw = btn.getAttribute('data-kw') || '';
+      var done = function(){
+        showToast('已复制「'+kw+'」，去小红书App搜索～');
+        btn.classList.add('copied');
+        setTimeout(function(){ btn.classList.remove('copied'); }, 1500);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(kw).then(done).catch(function(){
+          if(fallbackCopy(kw)) done(); else showToast('复制失败，请手动输入「'+kw+'」搜索');
+        });
+      } else {
+        if(fallbackCopy(kw)) done(); else showToast('复制失败，请手动输入「'+kw+'」搜索');
+      }
+    });
+  });
+
+  // ---- 家长查看模式：学生分享当前打卡快照给家长 ----
+  var qs = new URLSearchParams(location.search);
+  var isParentView = qs.get('view') === 'parent';
+
+  function buildSnapshot(){
+    var f = {};
+    fieldIds.forEach(function(id){ var el=document.getElementById(id); if(el) f[id]=el.value; });
+    var c = {};
+    checks.forEach(function(cb){ c[cb.id] = cb.checked; });
+    return { ts: Date.now(), fields: f, checks: c };
+  }
+
+  function shareToParent(){
+    var payload = buildSnapshot();
+    var url = location.origin + location.pathname + '?view=parent&d=' + encodeURIComponent(JSON.stringify(payload));
+    var studentName = (document.getElementById('f-name').value || '').trim();
+    var shareText = (studentName ? studentName : '学生') + ' 的今日接机/入学进度（家长查看链接，可能会比较长，完整复制发送）：';
+    if(navigator.share){
+      navigator.share({ title:'今日日程进度', text: shareText, url: url }).catch(function(){
+        copyParentUrl(url);
+      });
+    } else {
+      copyParentUrl(url);
+    }
+  }
+  function copyParentUrl(url){
+    var done = function(){ showToast('已复制家长查看链接，去微信/短信发给家长～'); };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(done).catch(function(){
+        if(fallbackCopy(url)) done(); else showToast('复制失败，请手动分享当前网址');
+      });
+    } else {
+      if(fallbackCopy(url)) done(); else showToast('复制失败，请手动分享当前网址');
+    }
+  }
+  var shareBtn = document.getElementById('shareParentBtn');
+  if(shareBtn) shareBtn.addEventListener('click', shareToParent);
+
+  if(isParentView){
+    try{
+      var payload = JSON.parse(decodeURIComponent(qs.get('d') || '{}'));
+      Object.keys(payload.fields || {}).forEach(function(id){
+        var el = document.getElementById(id);
+        if(el) el.value = payload.fields[id];
+      });
+      Object.keys(payload.checks || {}).forEach(function(id){
+        var cb = document.getElementById(id);
+        if(cb){
+          cb.checked = !!payload.checks[id];
+          var host = cb.closest('.item') || cb.closest('.reg-block');
+          if(host) host.classList.toggle('done', cb.checked);
+        }
+      });
+      document.body.setAttribute('data-parent-view', '1');
+      var modeBadge = document.getElementById('modeBadge');
+      if(modeBadge){ modeBadge.textContent = '👨\u200d👩\u200d👧 家长端（只读）'; modeBadge.classList.add('parent'); }
+      Array.prototype.slice.call(document.querySelectorAll('.card input, .card select, .item-check, .reg-head input[type=checkbox]')).forEach(function(el){ el.disabled = true; });
+      var banner = document.createElement('div');
+      banner.className = 'parent-banner';
+      var ts = payload.ts ? new Date(payload.ts).toLocaleString('zh-CN', {hour12:false}) : '未知时间';
+      banner.innerHTML = '👨\u200d👩\u200d👧 <b>家长查看模式</b>——这是学生 <b>' + ts + '</b> 分享时的打卡快照，不是实时更新。想看最新进度，请让学生重新点一次「分享进度给家长」再发一次链接。';
+      var wrapEl = document.querySelector('.wrap');
+      wrapEl.insertBefore(banner, wrapEl.firstChild);
+      updateProgress(); updateEndTime();
+    }catch(e){}
+  }
+
+})();
+</script>
+</body>
+</html>
